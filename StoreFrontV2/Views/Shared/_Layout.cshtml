@@ -1,0 +1,179 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>An Oddity Commodity</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+
+    <!-- Favicons -->
+    <link href="~/Content/img/favicon.png" rel="icon">
+    <link href="~/Content/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Raleway:400,700,900|Lato:400,900" rel="stylesheet">
+
+    <!-- Ajax -->
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/south-street/jquery-ui.css">
+
+    <!-- Bootstrap CSS File -->
+    <link href="~/Content/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Libraries CSS Files -->
+    <link href="~/Content/lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="~/Content/lib/prettyphoto/css/prettyphoto.css" rel="stylesheet">
+    <link href="~/Content/lib/hover/hoverex-all.css" rel="stylesheet">
+
+    <!-- Main Stylesheet File -->
+    <link href="~/Content/css/style.css" rel="stylesheet">
+
+    <link href="~/Content/CustomStyle.css" rel="stylesheet" />
+
+    <!-- =======================================================
+      Template Name: Solid
+      Template URL: https://templatemag.com/solid-bootstrap-business-template/
+      Author: TemplateMag.com
+      License: https://templatemag.com/license/
+    ======================================================= -->
+</head>
+
+<body>
+
+    <!-- Fixed navbar -->
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="floating-big" href=@Url.Action("Index", "Home")>
+                    <img src="~/Content/img/warning-11-48.png" />
+                </a>
+                <a class="navbar-brand" href=@Url.Action("Index", "Home")>An Oddity Commodity</a>
+            </div>
+            <div class="navbar-collapse collapse navbar-right">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li>@Html.ActionLink("About", "About", "Home")</li>
+                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    <li>@Html.ActionLink("Oddities for Sale", "Index", "Oddities")</li>
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin Functions <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li>@Html.ActionLink("Roles", "Index", "RolesAdmin")</li>
+                                <li>@Html.ActionLink("Users", "Index", "UsersAdmin")</li>
+                            </ul>
+                        </li>
+                    }
+
+                    <li class="nav-item">
+                        @* Only show the icon for the cart if the session cart exists and has more than 0 items *@
+                        @if (Session["cart"] != null &&
+                            ((Dictionary<int, StoreFrontV2.Models.CartItemViewModel>)Session["cart"]).Count > 0)
+                        {
+                            <a class="dropdown-item" href="/ShoppingCart/Index">Cart<i class="fa fa-shopping-cart"></i></a>
+                        }
+                        else
+                        {
+                            @Html.ActionLink("Cart", "Index", "ShoppingCart")
+                        }
+                    </li>
+                </ul>
+                @Html.Partial("_LoginPartial")
+            </div>
+
+            <!--/.nav-collapse -->
+        </div>
+    </div>
+
+    <!-- *****************************************************************************************************************
+       HEADERWRAP
+       ***************************************************************************************************************** -->
+    <div id="main" class="section" style="background-color: #17120C; min-height: 60vh;">
+        <div class="container">
+            <div id="message display" class="row">
+                <div class="col-md-10 col-md-offset-1" id="MessageContent"></div>
+            </div>
+            <div class="row" style="margin-top: 5em;">
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+    <!-- *****************************************************************************************************************
+       FOOTER
+       ***************************************************************************************************************** -->
+    <div id="footerwrap">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4">
+                    <h4>About</h4>
+                    <div class="hline-w"></div>
+                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
+                </div>
+                <div class="col-lg-4">
+                    <h4>Social Links</h4>
+                    <div class="hline-w"></div>
+                    <p>
+                        <a href="#"><i class="fa fa-dribbble"></i></a>
+                        <a href="#"><i class="fa fa-facebook"></i></a>
+                        <a href="#"><i class="fa fa-twitter"></i></a>
+                        <a href="#"><i class="fa fa-instagram"></i></a>
+                        <a href="#"><i class="fa fa-tumblr"></i></a>
+                    </p>
+                </div>
+                <div class="col-lg-4">
+                    <h4>Our Address</h4>
+                    <div class="hline-w"></div>
+                    <p>
+                        Some Ave, 987,<br /> 23890, New York,<br /> United States.<br />
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div id="copyrights">
+        <div class="container">
+            <p>
+                &copy; Copyrights <strong>Solid</strong>. All Rights Reserved
+            </p>
+            <div class="credits">
+                <!--
+                  You are NOT allowed to delete the credit link to TemplateMag with free version.
+                  You can delete the credit link only if you bought the pro version.
+                  Buy the pro version with working PHP/AJAX contact form: https://templatemag.com/solid-bootstrap-business-template/
+                  Licensing information: https://templatemag.com/license/
+                -->
+                Created with Solid template by <a href="https://templatemag.com/">TemplateMag</a>
+            </div>
+        </div>
+    </div>
+    <!-- / copyrights -->
+    <!-- JavaScript Libraries -->
+    <script src="~/Content/lib/jquery/jquery.min.js"></script>
+    <script src="~/Content/lib/bootstrap/js/bootstrap.min.js"></script>
+    <script src="~/Content/lib/php-mail-form/validate.js"></script>
+    <script src="~/Content/lib/prettyphoto/js/prettyphoto.js"></script>
+    <script src="~/Content/lib/isotope/isotope.min.js"></script>
+    <script src="~/Content/lib/hover/hoverdir.js"></script>
+    <script src="~/Content/lib/hover/hoverex.min.js"></script>
+
+    <!-- Template Main Javascript File -->
+    <script src="~/Content/js/main.js"></script>
+
+    <!-- Ajax -->
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/jquery.ajax.unobtrusive/3.2.4/jquery.unobtrusive-ajax.min.js"></script>
+
+    @RenderSection("Scripts", false)
+
+</body>
+</html>

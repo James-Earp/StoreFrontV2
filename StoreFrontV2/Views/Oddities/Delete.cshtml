@@ -1,0 +1,72 @@
+﻿@model StoreFrontEFSecured.DATA.EF.Oddity
+
+@{
+    ViewBag.Title = "Delete this Oddity?";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<h3>Are you sure you want to delete this Oddity?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Name of Oddity
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OddityName)
+        </dd>
+
+        <dt>
+            Date of Recovery
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RecoveryDate)
+        </dd>
+
+        <dt>
+            Price
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+
+        <dt>
+            Genre
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Genre.Genre1)
+        </dd>
+
+        <dt>
+            Status of Oddity
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OddityStatu.Status)
+        </dd>
+
+        <dt>
+            Origin
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Origin.Origin1)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            @Html.ActionLink("Back to List", "Index") |
+            <input type="submit" value="Delete" class="btn btn-warning" />
+        </div>
+    }
+</div>

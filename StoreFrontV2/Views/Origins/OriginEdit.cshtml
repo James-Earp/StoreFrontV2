@@ -1,0 +1,57 @@
+﻿@model StoreFrontEFSecured.DATA.EF.Origin
+
+
+@using (Html.BeginForm("", "", FormMethod.Post, new { Id = "OriginEditForm" }))
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>Origin</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.OriginID)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Origin1, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Origin1, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Origin1, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" id="saveUpdates" value="Update Origins" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
+}
+
+<script>
+    $("#OriginEditForm").submit(function (e) {
+            var formData = $(this).serializeArray();
+            e.preventDefault();
+            $('#MessageContent').html("<div class='alert alert-info'>Please Wait...</div>");
+
+            $.ajax({
+                url: "@Url.Action("AjaxEdit", "Origins")",
+                type: "POST",
+                data: formData,
+                dataType: "json",
+
+                success: function (data) {
+                    $('#MessageContent').html("<div class='alert alert-success'>Your Record was Successfully Updated</div>");
+                    $('#OriginEditForm')[0].reset();
+                    $(function () {
+                        var row = '<tr><td>' + data.Origin1 +
+                            '</td><td>Refresh to view options</td></tr>';
+                        $("#Origin-" + data.OriginID).replaceWith(row);//Rewrote entire line for replace. we dont use append.
+                    });
+                    $("#OriginEdit").dialog('close');//close pop-up after submit
+                },
+                error: function (e) {
+                    $('#MessageContent').html("<div class='alert alert-success'>There was an error. Please try again.</div>");
+                }
+            });
+        });
+</script>

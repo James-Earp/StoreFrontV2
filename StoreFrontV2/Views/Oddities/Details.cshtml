@@ -1,0 +1,93 @@
+﻿@model StoreFrontEFSecured.DATA.EF.Oddity
+
+@{
+    ViewBag.Title = $"{Model.OddityName}";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div class="col-md-6">
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.OddityName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OddityName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OriginID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OriginID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RecoveryDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RecoveryDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UnitsSold)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UnitsSold)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Genre.Genre1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Genre.Genre1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OddityStatu.Status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OddityStatu.Status)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Origin.Origin1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Origin.Origin1)
+        </dd>
+
+        <p>
+            @using (Html.BeginForm("AddToCart", "Oddities", new { @oddityId = Model.OddityID }, FormMethod.Post, new { @class = "text-center" }))
+            {
+                @Html.HiddenFor(x => x.OddityID)
+                <span class="label">Quantity: </span>
+                @Html.TextBox("Qty", 1, new { @class = "form-control", @style = "max-width: 50px; display: inline;" })
+                <input type="submit" value="Add to Cart" class="btn btn-warning" name="qty" />
+            }
+        </p>
+        <p>
+            @Html.ActionLink("Back to List", "Index")
+        </p>
+
+    </dl>
+</div>
+<p>
+    <a href="@Url.Action("Edit", "Oddities", new { id=Model.OddityID })">
+        <i class="fa fa-pencil-square-o action-icons fa-5x" aria-hidden="true"></i>
+</p>

@@ -1,0 +1,25 @@
+﻿@Model IntroToMVC.UI.MVC.Models.ContactViewModel
+@{
+    ViewBag.Title = "EmailConfirmation";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<p>
+    I really wish your email hadnt been sent, @Model.Name. But whatever message below.
+</p>
+
+<ul>
+    <li>
+        Name: @Model.Name
+    </li>
+    <li>
+        Email: @Model.Email
+    </li>
+    <li>
+        Subject: @Model.Subject
+    </li>
+    <li>
+        Message: @Model.Message
+    </li>
+</ul>

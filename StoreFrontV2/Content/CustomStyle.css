@@ -1,0 +1,139 @@
+﻿.registerFormContainer {
+    border: 3px solid #000;
+    box-shadow: 20px 20px #286090;
+    padding: 3em 2em;
+    width: 60%;
+    margin: auto;
+}
+
+textarea {
+    resize: none;
+    min-height: 10em;
+}
+
+#mainContent > h2 {
+    text-align: center;
+}
+
+.form-control {
+    width: 98%;
+}
+
+#mainContent {
+    min-height: 600px;
+    width: 80%;
+    margin: 6em auto;
+}
+
+.navbar-default {
+    background-color: #C27D2C;
+    border-color: transparent;
+}
+
+.tpl6 .bg {
+    height: 100%;
+    width: 100%;
+    background-color: #C27D2C;
+    text-align: center;
+}
+
+div.light_rounded .pp_top .pp_middle, div.light_rounded .pp_content_container .pp_left, div.light_rounded .pp_content_container .pp_right, div.light_rounded .pp_bottom .pp_middle, div.light_square .pp_left, div.light_square .pp_middle, div.light_square .pp_right, div.light_square .pp_content, div.facebook .pp_content {
+    background: #C27D2C;
+}
+
+#footerwrap {
+    padding-top: 60px;
+    padding-bottom: 60px;
+    background: #C27D2C;
+}
+
+#copyrights {
+    background: #523102;
+    padding: 20px 0;
+    text-align: center;
+}
+
+#service i {
+    color: #C27D2C;
+    font-size: 60px;
+    padding: 15px;
+}
+
+body {
+    color: lightgray;
+}
+
+    body p {
+        color: darkgray;
+    }
+
+#twrap {
+    background-image: url('img/bg.jpg');
+    background: margin-top: 0px;
+    padding-top: 60px;
+    text-align: center;
+    background-attachment: relative;
+    background-position: center center;
+    min-height: 450px;
+    width: 100%;
+    -webkit-background-size: 100%;
+    -moz-background-size: 100%;
+    -o-background-size: 100%;
+    background-size: 100%;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+#papyrus {
+    background-image: url('img/dsdf.jpg');
+}
+
+#blue {
+    background: #70583B;
+    margin-top: 60px;
+    margin-bottom: 60px;
+    padding-top: 25px;
+    padding-bottom: 25px;
+}
+
+#yella-border {
+    border: solid;
+    border-color: #C27D2C;
+    border-width: 5px;
+}
+
+.navbar-default .navbar-nav > li > a:hover {
+    color: #521512; /*Dark red*/
+}
+
+.navbar-default .navbar-brand:focus, .navbar-default .navbar-brand:hover {
+    color: #521512; /*Dark red*/
+    background-color: transparent;
+}
+
+a {
+    color: #C27D2C;
+    text-decoration: none;
+}
+
+    a:hover, a:focus {
+        text-decoration: none;
+        color: #fff;
+    }
+#white{
+    color: white;
+}
+
+.registerFormContainer {
+    border: 3px solid #000;
+    box-shadow: none;
+    padding: 3em 2em;
+    width: 60%;
+    margin: auto;
+}
+
+.floating-big{
+    float: left!important;
+}

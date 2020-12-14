@@ -1,0 +1,143 @@
+﻿@model IEnumerable<StoreFrontEFSecured.DATA.EF.Origin>
+
+@{
+    ViewBag.Title = "Origins (AJAX)";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<p class="row">
+    <button id="toggleOriginCreate" class="btn btn-primary text-right pull-left">Create Origin</button>
+</p>
+<div id="OriginCreate">
+    @Html.Partial("OriginCreate", new StoreFrontEFSecured.DATA.EF.Origin())
+</div>
+<table class="table" id="OriginsTable">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Origin1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Oddity.OddityName)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr id="Origin-@item.OriginID">
+            <td>
+                @Html.DisplayFor(modelItem => item.Origin1)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Oddity.OddityName)
+            </td>
+            <td>
+                <a href="" class="EditLink" id="@item.OriginID">Edit |</a>
+                <a href="" class="DetailsLink" id="@item.OriginID">Details |</a>
+                @*@if (item.Oddity.Count == 0)
+                {
+                    @Ajax.ActionLink("Delete", "AjaxDelete", "Origins", new { id = item.OriginID}, new AjaxOptions
+               {
+                   HttpMethod = "POST",
+                   Confirm = "Are you sure you want to remove " + item.Origin1 + " from origins?",
+                   OnSuccess = "deleteConfirmed"
+               })
+
+                }
+
+                else
+                {
+                    <span>In Use</span>
+                }*@
+            </td>
+        </tr>
+    }
+
+</table>
+
+<div id="OriginDetails"></div>
+
+<div id="OriginEdit"></div>
+@section scripts {
+    <script>
+        function deleteConfirmed(response, status, data) {
+        var rowId = "#Origin-" + response.id;
+            $('#OriginsTable').find(rowId).remove();
+        $('#MessageContent').html("<div class='alert alert-success'>" + response.message + "</div>")
+        }
+
+        $('a.DetailsLink').click(function (e) {
+            e.preventDefault();
+            $('#OriginDetails').data('pId', $(this).attr('id'))
+                .dialog({
+                    modal: true,
+                    open: function () {
+                        var data = $(this).data('pId');
+                        $(this).load("/Origins/OriginDetails/" + data);
+                    },
+                    width: 400,
+                    height: 200,
+                    title: "Origin Details",
+                    resizable: false
+                });
+
+        });
+
+
+        $("#OriginCreate").hide();
+        $("#toggleOriginCreate").click(function () {
+            $("#OriginCreate").toggle()
+            if ($('#OriginCreate').is(':visible')) {
+                $('#toggleOriginCreate').html('Cancel');
+                $('#toggleOriginCreate').attr('class', "btn btn-danger");
+            }
+            else {
+                $('#toggleOriginCreate').html('Create Origin');
+                $('#toggleOriginCreate').attr('class', "btn btn-primary");
+            }
+        })
+
+        $("#OriginCreateForm").submit(function (e) {
+            var formData = $(this).serializeArray();
+            e.preventDefault();
+            $('#MessageContent').html("<div class='alert alert-info'>Please Wait...</div>");
+
+            $.ajax({
+                url: "@Url.Action("AjaxCreate", "Origins")",
+                type: "POST",
+                data: formData,
+                dataType: "json",
+
+                success: function (data) {
+                    $('#MessageContent').html("<div class='alert alert-success'>Your Record was Successfully Added</div>");
+                    $('#OriginCreateForm')[0].reset();
+                    $(function () {
+                        var row = '<tr><td>' + data.Origin1 +
+                            '</td></tr>';
+                        $('#OriginsTable').append(row);
+                    });
+                },
+                error: function (e) {
+                    $('#MessageContent').html("<div class='alert alert-success'>There was an error. Please try again.</div>");
+                }
+            });
+        });
+        $('a.EditLink').click(function (e) {
+            e.preventDefault();
+            $('#OriginEdit').data('pId', $(this).attr('id'))
+                .dialog({
+                    modal: true,
+                    open: function () {
+                        var data = $(this).data('pId');
+                        $(this).load("/Origins/OriginEdit/" + data);
+                    },
+                    width: 600,
+                    height: 450,
+                    title: "Edit Origin",
+                    resizable: false
+                });
+
+        });
+    </script>
+}
